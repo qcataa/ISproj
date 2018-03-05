@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.login-body {
+  background-image: url('/img/student.jpg')
+}

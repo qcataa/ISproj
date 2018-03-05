@@ -10,6 +10,11 @@ namespace ISproj.Controllers
     {
         public ActionResult Index()
         {
+            return Login();
+        }
+
+        public ActionResult Login()
+        {
             return View("Login");
         }
     }
