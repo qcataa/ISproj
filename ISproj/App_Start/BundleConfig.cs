@@ -25,7 +25,8 @@ namespace ISproj
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Site.css"));
+                      "~/Content/Site.css"
+                      ).Include("~/Content/font-awesome-4.0.3/css/font-awesome.css", new CssRewriteUrlTransform()));
         }
     }
 }

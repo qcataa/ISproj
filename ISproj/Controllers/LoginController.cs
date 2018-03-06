@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ISproj.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,14 +10,16 @@ namespace ISproj.Controllers
 
     public class LoginController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(LoginModel model)
         {
-            return Login();
+            return Login(model);
         }
 
-        public ActionResult Login()
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
         {
             return View("Login");
         }
+
     }
 }

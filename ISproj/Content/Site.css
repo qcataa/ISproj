@@ -23,6 +23,90 @@ textarea {
     max-width: 280px;
 }
 
+.left-main-selection-50percent {
+    width: 50%;
+    float: left;
+}
+
+.right-main-selection {
+    background-color: #235099;
+    opacity: .7;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+
 .login-body {
-  background-image: url('/img/student.jpg')
+    background-image: url('/img/student.jpg');
+}
+
+.login-auth-container {
+    width: 100px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.login-h {
+    font-family: 'Raleway';
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 2em;
+    padding: 7% 0 0 0;
+}
+
+.login-h:hover {
+    text-decoration: none;
+    color: white
+}
+
+.login-boxes {
+    margin: 0 auto;
+    width: 70%;
+    position: relative;
+}
+
+.login-box-4,
+.login-box-3,
+.login-box-2,
+.login-box-1 {
+    margin: auto;
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    padding: 4% 0 4% 0;
+    visibility: hidden;
+}
+
+.login-fields {
+    padding-left: 5%;
+}
+
+.login-input-box {
+    background-color: slategrey;
+    color: white;
+    opacity: .8;
+    margin-bottom: 3%;
+}
+
+.login-input-box::placeholder {
+    position: relative;
+    color: white;
+    left: 3px;
+}
+
+.login-input-box:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+.login-input-box::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+}
+
+.login-button {
+    background-color: #0b456a;
+    border-style: none;
+    margin-left: 25%;
 }
