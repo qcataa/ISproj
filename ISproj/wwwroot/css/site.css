@@ -1,0 +1,134 @@
+﻿/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.left-main-selection-50percent {
+    width: 50%;
+    float: left;
+}
+
+.right-main-selection {
+    background-color: #235099;
+    opacity: .7;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.login-body {
+    background-image: url('../images/student.jpg');
+}
+
+.login-auth-container {
+    width: 100px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.login-h {
+    font-family: 'Raleway';
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 2em;
+    padding: 5% 0 0 0;
+}
+
+    .login-h:hover {
+        text-decoration: none;
+        color: white
+    }
+
+.login-boxes {
+    margin: 0 auto;
+    width: 70%;
+    position: relative;
+}
+
+.login-box-4,
+.login-box-3,
+.login-box-2,
+.login-box-1 {
+    margin: auto;
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    padding: 1% 0 1% 0;
+}
+
+.login-fields {
+    padding-left: 5%;
+}
+
+.login-input-box {
+    background-color: slategrey;
+    color: white;
+    opacity: .8;
+    margin-bottom: 3%;
+}
+
+    .login-input-box::placeholder {
+        position: relative;
+        color: white;
+        left: 3px;
+    }
+
+    .login-input-box:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+
+    .login-input-box::-ms-input-placeholder { /* Microsoft Edge */
+        color: white;
+    }
+
+.login-button {
+    background-color: #0b456a;
+    border-style: none;
+    margin-left: 25%;
+}
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}

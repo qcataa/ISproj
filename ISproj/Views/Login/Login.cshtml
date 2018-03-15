@@ -1,14 +1,8 @@
 ﻿@model ISproj.Models.LoginModel
+@{
+    ViewData["Title"] = "Login Page";
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-    @Styles.Render("~/Content/css")
-</head>
 <body class="login-body">
     <header>
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -35,9 +29,20 @@
             <div class="login-box-1" id="ContainerBox1">
                 <div class="row">
                     <div class="col-sm-7 login-fields">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control login-input login-input-box", placeholder = "CNP", @id = "UserNameBox1" })
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control login-input login-input-box", placeholder = "Parola", @id = "PasswordBox1" })
-                        <button type="button" class="btn btn-primary login-button" id="ButtonBox1" onclick='showLogin("Box1")'>Log in</button>
+                        <form method="post" action="/Demo/RegisterInput">
+                            <input type="email"
+                                   class="form-control login-input login-input-box"
+                                   placeholder="CNP"
+                                   id="UserNameBox1"
+                                   name="UserName"/>
+                            <input type="password"
+                                   class="form-control login-input login-input-box"
+                                   placeholder="Parola"
+                                   id="PasswordBox1"
+                                   name="Password"/><br>
+                            <button type="submit">Register</button>
+                            <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>" />
+                        </form>
                     </div>
                     <div class="col-sm-5">
                         <a href="#" class="login-h visible" id="LabelBox1" onclick='showLogin("Box1")'>Student</a>
@@ -48,9 +53,8 @@
             <div class="login-box-2" id="ContainerBox2">
                 <div class="row">
                     <div class="col-sm-7 login-fields">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control login-input login-input-box", placeholder = "CNP", @id = "UserNameBox2" })
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control login-input login-input-box", placeholder = "Parola", @id = "PasswordBox2" })
-                        <button type="button" class="btn btn-primary login-button" id="ButtonBox2" onclick='showLogin("Box2")'>Log in</button>
+                        
+                    
                     </div>
                     <div class="col-sm-5">
                         <a href="#" class="login-h visible" id="LabelBox2" onclick='showLogin("Box2")'>Cadru Universitar</a>
@@ -60,9 +64,8 @@
             <div class="login-box-3" id="ContainerBox3">
                 <div class="row">
                     <div class="col-sm-7 login-fields">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control login-input login-input-box", placeholder = "CNP", @id = "UserNameBox3" })
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control login-input login-input-box", placeholder = "Parola", @id = "PasswordBox3" })
-                        <button type="button" class="btn btn-primary login-button" id="ButtonBox3" onclick='showLogin("Box3")'>Log in</button>
+                       
+                    
                     </div>
                     <div class="col-sm-5">
                         <a href="#" class="login-h visible" id="LabelBox3" onclick='showLogin("Box3")'>Secretariat</a>
@@ -72,12 +75,11 @@
             <div class="login-box-4" id="ContainerBox4">
                 <div class="row">
                     <div class="col-sm-7 login-fields">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control login-input login-input-box", placeholder = "CNP", @id = "UserNameBox4" })
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control login-input login-input-box", placeholder = "Parola", @id = "PasswordBox4" })
-                        <button type="button" class="btn btn-primary login-button" id="ButtonBox4">Log in</button>
+                        
+                    
                     </div>
                     <div class="col-sm-5">
-                        <a href="#" class="login-h visible" id="LabelBox4" onclick='showLogin("Box4")'>Administrator</a>
+                        <a href="#" class="login-h visible" id="LabelBox4" onclick='showLogin("Box4")'>Secretariat</a>
                     </div>
                 </div>
             </div>
@@ -87,27 +89,4 @@
 
 
     </div>
-    </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
-</html>
-<script>
-    function showLogin(string) {
-        HideAllBoxes();
-        var elems = $("div[id$=" + string + "]");
-        for (var it = 0; it < elems.length; it++) {
-            elems[it].classList.add("visible");
-        }
-    }
-
-    function HideAllBoxes() {
-        var elems = document.getElementsByClassName("visible");
-        for (var it = 0; it < elems.length; it++) {
-            if (!elems[it].id.includes("Label"))
-                elems[it].classList.remove("visible");;
-        }
-    }
-
-
-</script>

@@ -1,13 +1,12 @@
-﻿using ISproj.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using ISproj.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ISproj.Controllers
 {
-
     public class LoginController : Controller
     {
         public ActionResult Index(LoginModel model)
@@ -20,6 +19,5 @@ namespace ISproj.Controllers
         {
             return View("Login");
         }
-
     }
 }
