@@ -15,6 +15,11 @@ namespace ISproj.Controllers
             return View();
         }
 
+        public IActionResult Login_Create()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
