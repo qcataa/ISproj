@@ -12,7 +12,12 @@
     "outputFileName": "wwwroot/css/cssCM.min.css",
     "inputFiles": [
       "wwwwroot/css/cssCM.css"
-
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/cssAC.min.css",
+    "inputFiles": [
+      "wwwwroot/css/cssAC.css"
     ]
   },
   {

@@ -1,0 +1,14 @@
+﻿.forgot-password-center {
+    width: 600px;
+    margin: 300px auto; 0px auto;
+    background-color: rgba(200, 200, 200, 0.80);
+    padding: 20px;
+}
+
+.forgot-password-center h2 {
+    text-align: center;
+}
+
+.forgot-password-center h4 {
+    text-align: center;
+}
