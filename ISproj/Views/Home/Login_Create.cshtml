@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewData["Title"] = "Login_Create";
-}
+
 @using System.Collections.Generic
 @using System.Linq
 @using Microsoft.AspNetCore.Http
@@ -10,44 +8,46 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div class="container">
-    <div class="login-center">
-        <section>
-            <form asp-controller="Account" asp-action="Login" method="post">
-                <h4>Login</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="container-fluid login-bg">
+        <div class="login-right-selection"></div>
+        <div class="login-center">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/images/logo_ucv2.png" class="login-faculty-logo" />
                 </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="col-md-6">
+                    <section>
+                        <form asp-controller="Account" asp-action="Login" method="post">
+                            <h4>Login</h4>
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <input asp-for="Email" class="form-control" placeholder="CNP"/>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Password" class="form-control" placeholder="Parola"/>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default login-loginbtn">Log in</button>
+                            </div>
+                            <div class="form-group">
+                                <p class="login-recover">
+                                    <a asp-controller="Account" asp-action="ForgotPassword" >Recupereaza-ti parola</a>
+                                </p>
+                            </div>
+                        </form>
+                    </section>
                 </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="RememberMe">
-                            <input asp-for="RememberMe" />
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a asp-controller="Account" asp-action="ForgotPassword">Forgot your password?</a>
-                    </p>    
-                </div>
-            </form>
-        </section>
+            </div>
+        </div>
+
     </div>
-</div>
-<script>
+<footer class="login-footer">
+    <span> &#64; 2018 Universitatea din Craiova </span>
+</footer>
+    <script>
 
 
-</script>
+    </script>

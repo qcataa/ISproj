@@ -9,6 +9,13 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/css/cssCM.min.css",
+    "inputFiles": [
+      "wwwwroot/css/cssCM.css"
+
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js"
