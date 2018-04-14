@@ -10,11 +10,11 @@ using ISproj.Models;
 
 namespace ISproj.Controllers
 {
-    public class StudentViewModelsController : Controller
+    public class StudentController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentViewModelsController(ApplicationDbContext context)
+        public StudentController(ApplicationDbContext context)
         {
             _context = context;
         }
