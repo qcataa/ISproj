@@ -8,6 +8,7 @@ namespace ISproj.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        [Display(Name = "Utilizator")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -17,7 +18,7 @@ namespace ISproj.Models.ManageViewModels
         public string Email { get; set; }
 
         [Phone]
-        [Display(Name = "Phone number")]
+        [Display(Name = "Numar de telefon")]
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }

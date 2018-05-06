@@ -10,18 +10,18 @@ namespace ISproj.Models.ManageViewModels
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Parola curenta")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Parola trebuie sa contina intre {2} si {1} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Parola noua")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirma parola")]
+        [Compare("NewPassword", ErrorMessage = "Confirmarea nu se potriveste.")]
         public string ConfirmPassword { get; set; }
 
         public string StatusMessage { get; set; }
