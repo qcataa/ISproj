@@ -25,20 +25,28 @@
     padding: 10px 0px;
 }
 
+.logged-user-logo-container {
+    display: block;
+}
+
 .logged-user-logo-university {
+    color: white;
     border: 4px solid white;
     padding: 0px 10px;
     width: fit-content;
     font-size: 50px;
     font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
     display: inline-block;
+    text-decoration: none;
 }
 
 .logged-user-logo-text {
+    color: white;
     display: inline-block;
     margin-left: 5px;
     font-weight: 700;
     line-height: 35px;
+    text-decoration: none;
 }
 
 .logged-user-logo {
