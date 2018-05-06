@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/cssCM.css" />
         <link rel="stylesheet" href="~/css/cssAC.css" />
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -22,6 +23,36 @@
 <body>
     @if (SignInManager.IsSignedIn(User))
     {
+        <div class="header-background-color">
+            <div class="container">
+                <div class="row logged-user-header">
+                    <div class="col col-sm-4">
+                        <div class="logged-user-logo-university">
+                            UCV
+                        </div>
+                        <div class="logged-user-logo-text">
+                            <div class=" logged-user-logo">
+                                Evidenta
+                            </div>
+                            <div class=" logged-user-logo">
+                                Studentilor
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-4 text-center logged-header-align-bottom">
+                        Facultatea: Automatica, Calculatoare si Electronica
+                    </div>
+                    <div class="col col-sm-4">
+                        <div>
+                            <div>
+                                @await Html.PartialAsync("_LoginPartial")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -43,6 +74,7 @@
                 </div>
             </div>
         </nav>
+        -->
         <div class="container body-content">
             @RenderBody()
 
@@ -51,7 +83,6 @@
     else
     {
         @RenderBody()
-
     }
 
     <environment include="Development">

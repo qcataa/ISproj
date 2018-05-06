@@ -12,3 +12,74 @@
 .forgot-password-center h4 {
     text-align: center;
 }
+
+.header-background-color {
+    background-color: #337ab7;
+    width: 100%;
+}
+
+.logged-user-header {
+    color: white;
+    font-family: Raleway, 'Proxima Nova';
+    font-weight: 600;
+    padding: 10px 0px;
+}
+
+.logged-user-logo-university {
+    border: 4px solid white;
+    padding: 0px 10px;
+    width: fit-content;
+    font-size: 50px;
+    font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    display: inline-block;
+}
+
+.logged-user-logo-text {
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: 700;
+    line-height: 35px;
+}
+
+.logged-user-logo {
+    position: relative;
+    top: 7px;
+    font-size: 24px;
+}
+
+.logged-header-align-bottom {
+    padding-top: 60px;
+}
+
+.logged-user-header-profile-name {
+    font-size: 20px;
+}
+
+.logged-user-header-profile-email {
+    font-size: 20px;
+    color: white;
+    margin: 0 auto;
+    width: fit-content;
+    text-decoration: none;
+}
+
+.logged-user-header-profile-email:hover {
+    text-decoration: none;
+    color: rgb(11, 69, 107);
+}
+
+.log-out-btn {
+    margin-top: 10px;
+    background-color: #337ab7;
+    border: 1px solid white;
+}
+
+.log-out-btn:hover {
+    margin-top: 10px;
+    background-color: rgb(11, 69, 107);
+    color: white;
+}
+
+.profile-area {
+    width: 100%;
+}
