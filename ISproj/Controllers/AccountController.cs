@@ -78,13 +78,13 @@ namespace ISproj.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError(string.Empty, "Datele de autentificare sunt incorecte");
+                    return View("~/Views/Home/Login_Create.cshtml");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("~/Views/Home/Login_Create.cshtml");
         }
 
         [HttpGet]

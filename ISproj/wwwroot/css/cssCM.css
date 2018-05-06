@@ -1,6 +1,6 @@
 ﻿.login-center {
     margin: 0 auto;
-    margin-top: 350px;
+    margin-top: 250px;
     text-align: center;
     padding: 20px 20px 20px 20px;
     width: 600px;
@@ -72,5 +72,9 @@
 }
 
     .login-footer span {
+        color: white;
+    }
+
+    .login-error{
         color: white;
     }
