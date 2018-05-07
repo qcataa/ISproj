@@ -13,7 +13,11 @@ namespace ISproj.Views.Home
 
         public static string Index => "Index";
 
+        public static string Teacher => "Teacher";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
+
+        public static string TeacherNavClass(ViewContext viewContext) => PageNavClass(viewContext, Teacher);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

@@ -5,6 +5,7 @@
 }
 
 <ul class="nav nav-pills nav-stacked">
-    <li class="@HomeNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profil</a></li>
+    <li class="@HomeNavPages.IndexNavClass(ViewContext)"><a asp-controller="Home" asp-action="Index">Profil</a></li>
+    <li class="@HomeNavPages.TeacherNavClass(ViewContext)"><a asp-controller="Teacher" asp-action="Index">Profesori</a></li>
 </ul>
 
