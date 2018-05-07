@@ -5,7 +5,9 @@
 @model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
 <div class="container-fluid login-bg">
     <div class="login-right-selection"></div>
     <div class="login-center">
