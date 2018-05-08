@@ -25,6 +25,6 @@ namespace ISproj.Data
 
         public DbSet<ISproj.Models.Student> StudentViewModel { get; set; }
 
-        public DbSet<ISproj.Models.TeacherViewModel> TeacherViewModel { get; set; }
+        public DbSet<ISproj.Models.Teacher> TeacherViewModel { get; set; }
     }
 }

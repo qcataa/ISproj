@@ -54,7 +54,7 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CNP,FirstName,LastName")] TeacherViewModel teacherViewModel)
+        public async Task<IActionResult> Create([Bind("CNP,FirstName,LastName")] Teacher teacherViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CNP,FirstName,LastName")] TeacherViewModel teacherViewModel)
+        public async Task<IActionResult> Edit(string id, [Bind("CNP,FirstName,LastName")] Teacher teacherViewModel)
         {
             if (id != teacherViewModel.CNP)
             {

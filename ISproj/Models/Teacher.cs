@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISproj.Models
 {
-    public class TeacherViewModel
+    public class Teacher
     {
         [Key]
         public string CNP { get; set; }
