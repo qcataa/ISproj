@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,41 +28,46 @@
     </environment>
 </head>
 <body>
-    <div class="header-background-color">
-        <div class="container">
+    <div class="container-fluid login-bg">
+        <div class="login-right-selection"></div>
+        <div class="login-center">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/images/logo_ucv2.png" class="login-faculty-logo" />
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <form asp-controller="Account" asp-action="Login" method="post">
+                            <h4 class="login-error">Login</h4>
+                            <hr />
 
-            <div class="row logged-user-header">
-                <div class="col col-sm-4">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logged-user-logo-container">
-                        <div class="logged-user-logo-university">
-                            UCV
-                        </div>
-                        <div class="logged-user-logo-text">
-                            <div class=" logged-user-logo">
-                                Evidenta
+                            <div class="form-group">
+                                <input asp-for="Email" class="form-control" placeholder="CNP" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
-                            <div class=" logged-user-logo">
-                                Studentilor
+                            <div class="form-group">
+                                <input asp-for="Password" class="form-control" placeholder="Parola" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col col-sm-4 text-center logged-header-align-bottom">
-                    Facultatea: Automatica, Calculatoare si Electronica
-                </div>
-                <div class="col col-sm-4">
-                    <div>
-                        <div>
-                            @await Html.PartialAsync("_LoginPartial")
-                        </div>
-                    </div>
+                            <div asp-validation-summary="All" class="text-danger login-error"></div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default login-loginbtn">Log in</button>
+                            </div>
+                            <div class="form-group">
+                                <p class="login-recover">
+                                    <a asp-controller="Account" asp-action="ForgotPassword">Recupereaza-ti parola</a>
+                                </p>
+                            </div>
+                        </form>
+                    </section>
                 </div>
             </div>
         </div>
+
     </div>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+    <footer class="login-footer">
+        <span> &#64; 2018 Universitatea din Craiova </span>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -77,6 +90,5 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

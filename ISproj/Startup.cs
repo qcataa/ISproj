@@ -61,7 +61,7 @@ namespace ISproj
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Login_Create}/{id?}");
+                    template: "{controller=Welcome}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "Teacher",
                     template: "{controller=Teacher}/{action=Index}/{id?}");

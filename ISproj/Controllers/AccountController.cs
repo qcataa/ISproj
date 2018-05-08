@@ -79,12 +79,12 @@ namespace ISproj.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Datele de autentificare sunt incorecte");
-                    return View("~/Views/Home/Login_Create.cshtml");
+                    return RedirectToAction(nameof(WelcomeController.Index), "Welcome");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View("~/Views/Home/Login_Create.cshtml");
+            return RedirectToAction(nameof(WelcomeController.Index), "Welcome");
         }
 
         [HttpGet]
@@ -247,7 +247,7 @@ namespace ISproj.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Login_Create), "Home");
+            return RedirectToAction(nameof(WelcomeController.Index), "Welcome");
         }
 
         [HttpPost]
