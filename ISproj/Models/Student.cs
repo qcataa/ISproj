@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ISproj.Models
 {
-    public class StudentViewModel
+    public class Student
     {
         public int id { get; set; }
         public string Name { get; set; }

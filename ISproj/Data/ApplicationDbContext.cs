@@ -23,7 +23,7 @@ namespace ISproj.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<ISproj.Models.StudentViewModel> StudentViewModel { get; set; }
+        public DbSet<ISproj.Models.Student> StudentViewModel { get; set; }
 
         public DbSet<ISproj.Models.TeacherViewModel> TeacherViewModel { get; set; }
     }
