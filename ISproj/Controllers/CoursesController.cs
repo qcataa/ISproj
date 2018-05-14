@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISproj.Data;
 using ISproj.Models;
+using ISproj.Models.CoursesViewModels;
 
 namespace ISproj.Controllers
 {
@@ -44,9 +45,14 @@ namespace ISproj.Controllers
         }
 
         // GET: Courses/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var teachers = await _context.TeacherViewModel.ToListAsync();
+
+            CreateViewModel model = new CreateViewModel {};
+            model.Teachers = teachers;
+
+            return View(model);
         }
 
         // POST: Courses/Create
@@ -54,10 +60,21 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Credits")] CourseModel courseModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Credits")] CourseModel courseModel, String TeacherCNP)
         {
+            var teacherModel = await _context.TeacherViewModel
+                .SingleOrDefaultAsync(m => m.LastName + " " + m.FirstName == TeacherCNP);
+
+            if(teacherModel == null)
+            {
+                return NotFound();
+            }
+
+            courseModel.Teacher = teacherModel;
+
             if (ModelState.IsValid)
             {
+                teacherModel.Courses.Append(courseModel);
                 _context.Add(courseModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
