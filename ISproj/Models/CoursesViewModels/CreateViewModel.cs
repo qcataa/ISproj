@@ -10,5 +10,6 @@ namespace ISproj.Models.CoursesViewModels
         public String Name;
         public int Credits;
         public List<Teacher> Teachers;
+        public string TeacherId;
     }
 }

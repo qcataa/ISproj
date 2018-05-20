@@ -23,7 +23,8 @@ namespace ISproj.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CourseModel.ToListAsync());
+            var courses = await _context.CourseModel.Include(course => course.Teacher).ToListAsync();
+            return View(courses);
         }
 
         // GET: Courses/Details/5
@@ -34,7 +35,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var courseModel = await _context.CourseModel
+            var courseModel = await _context.CourseModel.Include(c => c.Teacher)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (courseModel == null)
             {
@@ -60,10 +61,10 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Credits")] CourseModel courseModel, String TeacherCNP)
+        public async Task<IActionResult> Create([Bind("Id,Name,Credits,TeacherId")] CourseModel courseModel)
         {
             var teacherModel = await _context.TeacherViewModel
-                .SingleOrDefaultAsync(m => m.LastName + " " + m.FirstName == TeacherCNP);
+                .SingleOrDefaultAsync(m => m.CNP == courseModel.TeacherId);
 
             if(teacherModel == null)
             {
@@ -71,11 +72,12 @@ namespace ISproj.Controllers
             }
 
             courseModel.Teacher = teacherModel;
+            courseModel.TeacherId = teacherModel.CNP;
 
             if (ModelState.IsValid)
             {
-                teacherModel.Courses.Append(courseModel);
                 _context.Add(courseModel);
+                teacherModel.Courses.Append(courseModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -90,7 +92,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var courseModel = await _context.CourseModel.SingleOrDefaultAsync(m => m.Id == id);
+            var courseModel = await _context.CourseModel.Include(m => m.Teacher).SingleOrDefaultAsync(m => m.Id == id);
             if (courseModel == null)
             {
                 return NotFound();
@@ -103,7 +105,7 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Credits")] CourseModel courseModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Credits,TeacherId")] CourseModel courseModel)
         {
             if (id != courseModel.Id)
             {

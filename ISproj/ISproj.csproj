@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-ISproj-4F69AC10-7FA7-4A8F-A3BB-8DCAB5ED0929</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180520114050_UpdateCourseModelWithTeacherId.cs" />
+    <Compile Remove="Data\Migrations\20180520114050_UpdateCourseModelWithTeacherId.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />

@@ -12,6 +12,7 @@ namespace ISproj.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Credits { get; set; }
-        public Teacher Teacher { get; set; }
+        public virtual string TeacherId { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

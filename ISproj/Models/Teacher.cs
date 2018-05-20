@@ -12,6 +12,6 @@ namespace ISproj.Models
         public string CNP { get; set; }
         public string FirstName{ get; set; }
         public string LastName{ get; set; }
-        public IEnumerable<CourseModel> Courses { get; set; }
+        public virtual ICollection<CourseModel> Courses { get; set; }
     }
 }
