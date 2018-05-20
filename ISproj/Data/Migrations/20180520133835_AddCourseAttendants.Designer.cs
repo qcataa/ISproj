@@ -11,9 +11,10 @@ using System;
 namespace ISproj.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180520133835_AddCourseAttendants")]
+    partial class AddCourseAttendants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +81,7 @@ namespace ISproj.Data.Migrations
 
                     b.Property<int>("CourseId");
 
-                    b.Property<int?>("Grade");
+                    b.Property<int>("Grade");
 
                     b.Property<int>("StudentId");
 
