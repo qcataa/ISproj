@@ -28,5 +28,7 @@ namespace ISproj.Data
         public DbSet<ISproj.Models.Teacher> TeacherViewModel { get; set; }
 
         public DbSet<ISproj.Models.CourseModel> CourseModel { get; set; }
+
+        public DbSet<ISproj.Models.Scholarship> Scholarship { get; set; }
     }
 }
