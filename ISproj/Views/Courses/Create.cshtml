@@ -32,11 +32,11 @@
                         var teacher = Model.Teachers[i];
                         if (i == 0)
                         {
-                            <option value="@teacher.CNP" selected>@teacher.LastName @teacher.FirstName</option>
+                    <option value="@teacher.Id" selected>@teacher.FullName</option>
                         }
                         else
                         {
-                            <option value="@teacher.CNP">@teacher.LastName @teacher.FirstName</option>
+                            <option value="@teacher.Id">@teacher.FullName</option>
                         }
 
                     }

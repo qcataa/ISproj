@@ -1,4 +1,4 @@
-﻿@model ISproj.Models.CourseModel
+﻿@model ISproj.Models.CoursesViewModels.CreateViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -24,6 +24,24 @@
                 <label asp-for="Credits" class="control-label"></label>
                 <input asp-for="Credits" class="form-control" />
                 <span asp-validation-for="Credits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Teacher</label>
+                <select asp-for="TeacherId" class="form-control">
+                    @foreach (var teacher in Model.Teachers)
+                    {
+                        if (teacher.Id == Model.TeacherId)
+                        {
+                            <option value="@teacher.Id" selected>@teacher.FullName</option>
+                        }
+                        else
+                        {
+                            <option value="@teacher.Id">@teacher.FullName</option>
+                        }
+
+                    }
+                </select>
+                <span asp-validation-for="TeacherId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

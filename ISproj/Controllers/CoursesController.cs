@@ -64,7 +64,7 @@ namespace ISproj.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,Credits,TeacherId")] CourseModel courseModel)
         {
             var teacherModel = await _context.TeacherViewModel
-                .SingleOrDefaultAsync(m => m.CNP == courseModel.TeacherId);
+                .SingleOrDefaultAsync(m => m.Id == courseModel.TeacherId);
 
             if(teacherModel == null)
             {
@@ -72,7 +72,7 @@ namespace ISproj.Controllers
             }
 
             courseModel.Teacher = teacherModel;
-            courseModel.TeacherId = teacherModel.CNP;
+            courseModel.TeacherId = teacherModel.Id;
 
             if (ModelState.IsValid)
             {
@@ -92,12 +92,20 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var courseModel = await _context.CourseModel.Include(m => m.Teacher).SingleOrDefaultAsync(m => m.Id == id);
+            var courseModel = await _context.CourseModel.SingleOrDefaultAsync(m => m.Id == id);
             if (courseModel == null)
             {
                 return NotFound();
             }
-            return View(courseModel);
+
+            var courseViewModel = new CreateViewModel();
+            courseViewModel.Id = courseModel.Id;
+            courseViewModel.Name = courseModel.Name;
+            courseViewModel.TeacherId = courseModel.TeacherId;
+            courseViewModel.Teachers = await _context.TeacherViewModel.ToListAsync();
+            courseViewModel.Credits = courseModel.Credits;
+
+            return View(courseViewModel);
         }
 
         // POST: Courses/Edit/5
@@ -143,7 +151,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var courseModel = await _context.CourseModel
+            var courseModel = await _context.CourseModel.Include(course => course.Teacher)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (courseModel == null)
             {

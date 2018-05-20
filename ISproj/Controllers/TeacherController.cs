@@ -34,7 +34,7 @@ namespace ISproj.Controllers
             }
 
             var teacherViewModel = await _context.TeacherViewModel
-                .SingleOrDefaultAsync(m => m.CNP == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (teacherViewModel == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CNP,FirstName,LastName")] Teacher teacherViewModel)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName")] Teacher teacherViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var teacherViewModel = await _context.TeacherViewModel.SingleOrDefaultAsync(m => m.CNP == id);
+            var teacherViewModel = await _context.TeacherViewModel.SingleOrDefaultAsync(m => m.Id == id);
             if (teacherViewModel == null)
             {
                 return NotFound();
@@ -86,9 +86,9 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CNP,FirstName,LastName")] Teacher teacherViewModel)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,FirstName,LastName")] Teacher teacherViewModel)
         {
-            if (id != teacherViewModel.CNP)
+            if (id != teacherViewModel.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ISproj.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TeacherViewModelExists(teacherViewModel.CNP))
+                    if (!TeacherViewModelExists(teacherViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ISproj.Controllers
             }
 
             var teacherViewModel = await _context.TeacherViewModel
-                .SingleOrDefaultAsync(m => m.CNP == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (teacherViewModel == null)
             {
                 return NotFound();
@@ -139,7 +139,7 @@ namespace ISproj.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var teacherViewModel = await _context.TeacherViewModel.SingleOrDefaultAsync(m => m.CNP == id);
+            var teacherViewModel = await _context.TeacherViewModel.SingleOrDefaultAsync(m => m.Id == id);
             _context.TeacherViewModel.Remove(teacherViewModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -147,7 +147,7 @@ namespace ISproj.Controllers
 
         private bool TeacherViewModelExists(string id)
         {
-            return _context.TeacherViewModel.Any(e => e.CNP == id);
+            return _context.TeacherViewModel.Any(e => e.Id == id);
         }
     }
 }

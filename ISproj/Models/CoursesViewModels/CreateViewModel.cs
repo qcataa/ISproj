@@ -7,6 +7,7 @@ namespace ISproj.Models.CoursesViewModels
 {
     public class CreateViewModel
     {
+        public int Id;
         public String Name;
         public int Credits;
         public List<Teacher> Teachers;
