@@ -21,6 +21,8 @@ namespace ISproj.Views.Home
 
         public static string Scholarship => "Burse";
 
+        public static string Faculties => "Facultati";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string TeacherNavClass(ViewContext viewContext) => PageNavClass(viewContext, Teacher);
@@ -30,6 +32,8 @@ namespace ISproj.Views.Home
         public static string CoursesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Courses);
 
         public static string ScholarshipNavClass(ViewContext viewContext) => PageNavClass(viewContext, Scholarship);
+
+        public static string FacultiesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Faculties);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

@@ -32,5 +32,7 @@ namespace ISproj.Data
         public DbSet<ISproj.Models.Scholarship> Scholarship { get; set; }
 
         public DbSet<ISproj.Models.CourseAttendant> CourseAttendant { get; set; }
+
+        public DbSet<ISproj.Models.Faculty> Faculty { get; set; }
     }
 }
