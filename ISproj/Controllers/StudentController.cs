@@ -174,6 +174,10 @@ namespace ISproj.Controllers
             var student = await _context.StudentViewModel.SingleOrDefaultAsync(m => m.id == id);
             _context.StudentViewModel.Remove(student);
             await _context.SaveChangesAsync();
+
+            var user = await _userManager.FindByEmailAsync(student.Email);
+            await _userManager.DeleteAsync(user);
+
             return RedirectToAction(nameof(Index));
         }
 
