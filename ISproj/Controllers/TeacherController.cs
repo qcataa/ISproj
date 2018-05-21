@@ -7,18 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISproj.Data;
 using ISproj.Models;
+using ISproj.Models.AccountViewModels;
+using Microsoft.AspNetCore.Identity;
+using ISproj.Models.CreateViewModels;
 
 namespace ISproj.Controllers
 {
     public class TeacherController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public TeacherController(ApplicationDbContext context)
+        public TeacherController(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
         }
-
         // GET: TeacherViewModels
         public async Task<IActionResult> Index()
         {
@@ -54,15 +66,32 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName")] Teacher teacherViewModel)
+        public async Task<IActionResult> Create(
+            [Bind("Id,FirstName,LastName,Email")] Teacher teacher,
+            [Bind("Email,Password,ConfirmPassword")] RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(teacherViewModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Teacher");
+                    _context.Add(teacher);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            return View(teacherViewModel);
+
+            TeacherCreateViewModel teacherCreateViewModel = new TeacherCreateViewModel
+            {
+                LastName = teacher.LastName,
+                FirstName = teacher.FirstName,
+                Email = teacher.Email,
+            };
+
+            return View(teacherCreateViewModel);
         }
 
         // GET: TeacherViewModels/Edit/5

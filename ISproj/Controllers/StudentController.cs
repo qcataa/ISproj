@@ -9,6 +9,7 @@ using ISproj.Data;
 using ISproj.Models;
 using Microsoft.AspNetCore.Identity;
 using ISproj.Models.AccountViewModels;
+using ISproj.Models.CreateViewModels;
 
 namespace ISproj.Controllers
 {
@@ -67,7 +68,7 @@ namespace ISproj.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("id,Name,Address,Surname,Birthdate,CNP")] Student student,
+            [Bind("id,Name,Address,Surname,Birthdate,CNP,Email")] Student student,
             [Bind("Email,Password,ConfirmPassword")] RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -83,7 +84,17 @@ namespace ISproj.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View(student);
+
+            StudentCreateViewModel studentCreateViewModel = new StudentCreateViewModel
+            {
+                Name=student.Name,
+                Surname=student.Surname,
+                Address=student.Address,
+                CNP=student.CNP,
+                Email=student.Email
+            };
+
+            return View(studentCreateViewModel);
         }
 
         // GET: StudentViewModels/Edit/5
