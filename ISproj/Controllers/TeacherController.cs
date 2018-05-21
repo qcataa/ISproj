@@ -171,7 +171,7 @@ namespace ISproj.Controllers
             var teacher = await _context.TeacherViewModel.SingleOrDefaultAsync(m => m.Id == id);
             _context.TeacherViewModel.Remove(teacher);
             await _context.SaveChangesAsync();
-
+            
             var user = await _userManager.FindByEmailAsync(teacher.Email);
             await _userManager.DeleteAsync(user);
 

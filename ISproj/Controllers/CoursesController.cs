@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ISproj.Data;
 using ISproj.Models;
-using ISproj.Models.CoursesViewModels;
 
 namespace ISproj.Controllers
 {
@@ -23,8 +22,8 @@ namespace ISproj.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var courses = await _context.CourseModel.Include(course => course.Teacher).ToListAsync();
-            return View(courses);
+            var applicationDbContext = _context.CourseModel.Include(c => c.Teacher);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Courses/Details/5
@@ -35,7 +34,8 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var courseModel = await _context.CourseModel.Include(c => c.Teacher)
+            var courseModel = await _context.CourseModel
+                .Include(c => c.Teacher)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (courseModel == null)
             {
@@ -46,14 +46,10 @@ namespace ISproj.Controllers
         }
 
         // GET: Courses/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var teachers = await _context.TeacherViewModel.ToListAsync();
-
-            CreateViewModel model = new CreateViewModel {};
-            model.Teachers = teachers;
-
-            return View(model);
+            ViewData["TeacherId"] = new SelectList(_context.TeacherViewModel, "Id", "FullName");
+            return View();
         }
 
         // POST: Courses/Create
@@ -61,26 +57,15 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Credits,TeacherId")] CourseModel courseModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Credits,TeacherId,Day,Hour,Duration")] CourseModel courseModel)
         {
-            var teacherModel = await _context.TeacherViewModel
-                .SingleOrDefaultAsync(m => m.Id == courseModel.TeacherId);
-
-            if(teacherModel == null)
-            {
-                return NotFound();
-            }
-
-            courseModel.Teacher = teacherModel;
-            courseModel.TeacherId = teacherModel.Id;
-
             if (ModelState.IsValid)
             {
                 _context.Add(courseModel);
-                teacherModel.Courses.Append(courseModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TeacherId"] = new SelectList(_context.TeacherViewModel, "Id", "FullName", courseModel.TeacherId);
             return View(courseModel);
         }
 
@@ -97,15 +82,8 @@ namespace ISproj.Controllers
             {
                 return NotFound();
             }
-
-            var courseViewModel = new CreateViewModel();
-            courseViewModel.Id = courseModel.Id;
-            courseViewModel.Name = courseModel.Name;
-            courseViewModel.TeacherId = courseModel.TeacherId;
-            courseViewModel.Teachers = await _context.TeacherViewModel.ToListAsync();
-            courseViewModel.Credits = courseModel.Credits;
-
-            return View(courseViewModel);
+            ViewData["TeacherId"] = new SelectList(_context.TeacherViewModel, "Id", "FullName", courseModel.TeacherId);
+            return View(courseModel);
         }
 
         // POST: Courses/Edit/5
@@ -113,7 +91,7 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Credits,TeacherId")] CourseModel courseModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Credits,TeacherId,Day,Hour,Duration")] CourseModel courseModel)
         {
             if (id != courseModel.Id)
             {
@@ -140,6 +118,7 @@ namespace ISproj.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TeacherId"] = new SelectList(_context.TeacherViewModel, "Id", "FullName", courseModel.TeacherId);
             return View(courseModel);
         }
 
@@ -151,7 +130,8 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var courseModel = await _context.CourseModel.Include(course => course.Teacher)
+            var courseModel = await _context.CourseModel
+                .Include(c => c.Teacher)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (courseModel == null)
             {

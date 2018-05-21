@@ -12,5 +12,8 @@ namespace ISproj.Models.CoursesViewModels
         public int Credits;
         public List<Teacher> Teachers;
         public string TeacherId;
+        public string Day { get; set; }
+        public int Hour { get; set; }
+        public int Duration { get; set; }
     }
 }

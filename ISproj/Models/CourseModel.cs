@@ -14,5 +14,8 @@ namespace ISproj.Models
         public int Credits { get; set; }
         public virtual string TeacherId { get; set; }
         public virtual Teacher Teacher { get; set; }
+        public string Day { get; set; }
+        public int Hour { get; set; }
+        public int Duration { get; set; }
     }
 }
