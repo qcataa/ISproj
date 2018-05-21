@@ -33,6 +33,8 @@ namespace ISproj
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddTransient<IDisposable, RoleManager<IdentityRole>>();
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -40,7 +42,7 @@ namespace ISproj
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -57,6 +59,8 @@ namespace ISproj
 
             app.UseAuthentication();
 
+            RolesData.SeedRoles(roleManager).Wait();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -66,6 +70,8 @@ namespace ISproj
                     name: "Teacher",
                     template: "{controller=Teacher}/{action=Index}/{id?}");
             });
+
+            
         }
     }
 }
