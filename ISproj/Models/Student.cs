@@ -15,6 +15,7 @@ namespace ISproj.Models
         public string Surname { get; set; }
         public DateTime Birthdate { get; set; }
         public string CNP { get; set; }
+        public string Email { get; set; }
 
         public string FullName { get { return Surname + ' ' + Name; } }
     }

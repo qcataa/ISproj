@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ISproj.Data;
 using ISproj.Models;
 using Microsoft.AspNetCore.Identity;
+using ISproj.Models.AccountViewModels;
 
 namespace ISproj.Controllers
 {
@@ -65,15 +66,24 @@ namespace ISproj.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Name,Address,Surname,Birthdate,CNP")] Student studentViewModel)
+        public async Task<IActionResult> Create(
+            [Bind("id,Name,Address,Surname,Birthdate,CNP")] Student student,
+            [Bind("Email,Password,ConfirmPassword")] RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(studentViewModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Student");
+                    _context.Add(student);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            return View(studentViewModel);
+            return View(student);
         }
 
         // GET: StudentViewModels/Edit/5
@@ -150,8 +160,8 @@ namespace ISproj.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var studentViewModel = await _context.StudentViewModel.SingleOrDefaultAsync(m => m.id == id);
-            _context.StudentViewModel.Remove(studentViewModel);
+            var student = await _context.StudentViewModel.SingleOrDefaultAsync(m => m.id == id);
+            _context.StudentViewModel.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
