@@ -27,7 +27,12 @@ namespace ISproj.Controllers
 
             if (HttpContext.User.IsInRole("Teacher"))
             {
-                return RedirectToAction("Teacher", "Timetable");
+                return RedirectToAction("Timetable", "Teacher");
+            }
+
+            if (HttpContext.User.IsInRole("Student"))
+            {
+                return RedirectToAction("Timetable", "Student");
             }
 
             return View();

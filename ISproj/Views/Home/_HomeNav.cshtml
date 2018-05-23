@@ -11,12 +11,11 @@
 <ul class="nav nav-pills nav-stacked">
     @if (isAdmin)
     {
-        <li class="@HomeNavPages.IndexNavClass(ViewContext)"><a asp-controller="Home" asp-action="Index">Profil</a></li>
+        <li class="@HomeNavPages.FacultiesNavClass(ViewContext)"><a asp-controller="Faculty" asp-action="Index">Facultati</a></li>
         <li class="@HomeNavPages.TeacherNavClass(ViewContext)"><a asp-controller="Teacher" asp-action="Index">Profesori</a></li>
         <li class="@HomeNavPages.StudentNavClass(ViewContext)"><a asp-controller="Student" asp-action="Index">Studenti</a></li>
         <li class="@HomeNavPages.CoursesNavClass(ViewContext)"><a asp-controller="Courses" asp-action="Index">Cursuri</a></li>
         <li class="@HomeNavPages.ScholarshipNavClass(ViewContext)"><a asp-controller="Scholarship" asp-action="Index">Burse</a></li>
-        <li class="@HomeNavPages.FacultiesNavClass(ViewContext)"><a asp-controller="Faculty" asp-action="Index">Facultati</a></li>
     }
     else if (isSecretary)
     {
@@ -28,7 +27,7 @@
     }
     else // student
     {
-
+        <li class="@HomeNavPages.TimetableNavClass(ViewContext)"><a asp-controller="Student" asp-action="Timetable">Orar</a></li>
     }
 </ul>
 

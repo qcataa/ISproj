@@ -148,6 +148,42 @@ namespace ISproj.Controllers
             return View(studentViewModel);
         }
 
+        public async Task<IActionResult> TimeTable()
+        {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
+
+            var email = user.Email;
+
+            var courses = await _context.CourseAttendant
+                .Include(attendant => attendant.Student)
+                .Where(attendant => attendant.Student.Email == email)
+                .Include(attendant => attendant.Course)
+                .Select(attendant => attendant.Course)
+                .ToListAsync();
+
+            String[] days = { "Luni", "Marti", "Miercuri", "Joi", "Vineri" };
+
+            courses.Sort((course1, course2) =>
+            {
+                var firstDay = Array.IndexOf(days, course1.Day);
+                var secondDay = Array.IndexOf(days, course2.Day);
+
+                if (firstDay != secondDay)
+                {
+                    return firstDay - secondDay;
+                }
+
+                if (course1.Hour != course2.Hour)
+                {
+                    return course1.Hour - course2.Hour;
+                }
+
+                return course1.Duration - course2.Duration;
+            });
+
+            return View(courses);
+        }
+
         // GET: StudentViewModels/Edit/5
         public async Task<IActionResult> Report(int? id)
         {
