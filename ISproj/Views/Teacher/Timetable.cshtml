@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ISproj.Models.CourseModel>
+
+@{
+    ViewData["Title"] = "Orar";
+    Layout = "/Views/Home/_Layout.cshtml";
+    ViewData.AddActivePage(HomeNavPages.Timetable);
+}
+
+<h2>Orar</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration) (in hours)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

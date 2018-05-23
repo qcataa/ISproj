@@ -37,6 +37,41 @@ namespace ISproj.Controllers
             return View(await _context.TeacherViewModel.ToListAsync());
         }
 
+        // GET: TeacherViewModels
+        public async Task<IActionResult> Timetable()
+        {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
+
+            var email = user.Email;
+
+            var courses = await _context.CourseModel
+                .Include(course => course.Teacher)
+                .Where(course => course.Teacher.Email == email)
+                .ToListAsync();
+
+            String[] days = { "Luni", "Marti", "Miercuri", "Joi", "Vineri" };
+
+            courses.Sort((course1, course2) =>
+            {
+                var firstDay = Array.IndexOf(days, course1.Day);
+                var secondDay = Array.IndexOf(days, course2.Day);
+
+                if(firstDay != secondDay)
+                {
+                    return firstDay - secondDay;
+                }
+
+                if(course1.Hour != course2.Hour)
+                {
+                    return course1.Hour - course2.Hour;
+                }
+
+                return course1.Duration - course2.Duration;
+            });
+
+            return View(courses);
+        }
+
         // GET: TeacherViewModels/Details/5
         public async Task<IActionResult> Details(string id)
         {
