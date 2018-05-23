@@ -17,5 +17,6 @@ namespace ISproj.Models
         public string Day { get; set; }
         public int Hour { get; set; }
         public int Duration { get; set; }
+        public bool Optional { get; set; }
     }
 }
