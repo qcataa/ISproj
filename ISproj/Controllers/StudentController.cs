@@ -148,6 +148,22 @@ namespace ISproj.Controllers
             return View(studentViewModel);
         }
 
+        // GET: StudentViewModels/Edit/5
+        public async Task<IActionResult> Report(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var attendances = await _context.CourseAttendant
+                .Where(attendant => attendant.StudentId == id)
+                .Include(attendant => attendant.Course)
+                .ToListAsync();
+
+            return View(attendances);
+        }
+
         // GET: StudentViewModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
