@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ISproj.Models.CourseModel>
+
+@{
+    ViewData["Title"] = "Note";
+    Layout = "/Views/Home/_Layout.cshtml";
+    ViewData.AddActivePage(HomeNavPages.Grades);
+}
+
+<h2>Orar</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Curs
+            </th>
+            <th>
+                Credite
+            </th>
+            <th>
+                Nota
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

@@ -237,5 +237,58 @@ namespace ISproj.Controllers
         {
             return _context.StudentViewModel.Any(e => e.id == id);
         }
+
+        [HttpGet,ActionName("GetStudentGrades")]
+        public JsonResult GetAllGradesForEntity(int? id)
+        {
+            if (id != null)
+            {
+
+
+                var GradesList = _context.CourseAttendant
+                    .Include(c => c.Course)
+                    .Include(c => c.Student)
+                    .SingleOrDefaultAsync(m => m.Student.id == id);
+
+            }
+            return Json("");
+        }
+
+        public async Task<IActionResult> Grades()
+        {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
+
+            var email = user.Email;
+
+            var grades = await _context.CourseAttendant
+                .Include(attendant => attendant.Student)
+                .Where(attendant => attendant.Student.Email == email)
+                .Include(attendant => attendant.Course)
+                .Select(attendant => attendant.Course)
+                .ToListAsync();
+
+            String[] days = { "Luni", "Marti", "Miercuri", "Joi", "Vineri" };
+
+            grades.Sort((course1, course2) =>
+            {
+                var firstDay = Array.IndexOf(days, course1.Day);
+                var secondDay = Array.IndexOf(days, course2.Day);
+
+                if (firstDay != secondDay)
+                {
+                    return firstDay - secondDay;
+                }
+
+                if (course1.Hour != course2.Hour)
+                {
+                    return course1.Hour - course2.Hour;
+                }
+
+                return course1.Duration - course2.Duration;
+            });
+
+            return View(grades);
+        }
+
     }
 }

@@ -25,6 +25,8 @@ namespace ISproj.Views.Home
 
         public static string Timetable => "Timetable";
 
+        public static string Grades => "Grades";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string TeacherNavClass(ViewContext viewContext) => PageNavClass(viewContext, Teacher);
@@ -38,6 +40,8 @@ namespace ISproj.Views.Home
         public static string FacultiesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Faculties);
 
         public static string TimetableNavClass(ViewContext viewContext) => PageNavClass(viewContext, Timetable);
+
+        public static string StudentGradesNavClass(ViewContext viewContext) => PageNavClass(viewContext, Grades);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {
