@@ -18,12 +18,12 @@ namespace ISproj.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ApplicationDbContext _context;
+        private readonly IDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IPDFWritter _pdfManager;
 
         public StudentController(
-            ApplicationDbContext context, 
+            IDbContext context, 
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
@@ -36,10 +36,21 @@ namespace ISproj.Controllers
             _pdfManager = pdfManager;
         }
 
+        public ICollection<Student> DoIndex()
+        {
+            return _context.StudentViewModel.ToList();
+        }
+
         // GET: StudentViewModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.StudentViewModel.ToListAsync());
+            return View(DoIndex());
+        }
+
+        public Student DoDetails(int? id)
+        {
+            return _context.StudentViewModel
+                .SingleOrDefault(m => m.id == id);
         }
 
         // GET: StudentViewModels/Details/5
@@ -50,8 +61,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var studentViewModel = await _context.StudentViewModel
-                .SingleOrDefaultAsync(m => m.id == id);
+            var studentViewModel = DoDetails(id);
             if (studentViewModel == null)
             {
                 return NotFound();
