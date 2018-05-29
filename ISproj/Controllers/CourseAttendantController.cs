@@ -49,8 +49,8 @@ namespace ISproj.Controllers
         // GET: CourseAttendant/Create
         public IActionResult Create()
         {
-            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Id");
-            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "id");
+            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Name");
+            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "FullName");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace ISproj.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Id", courseAttendant.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "id", courseAttendant.StudentId);
+            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Name", courseAttendant.CourseId);
+            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "FullName", courseAttendant.StudentId);
             return View(courseAttendant);
         }
 
@@ -85,8 +85,8 @@ namespace ISproj.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Id", courseAttendant.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "id", courseAttendant.StudentId);
+            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Name", courseAttendant.CourseId);
+            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "FullName", courseAttendant.StudentId);
             return View(courseAttendant);
         }
 
@@ -122,8 +122,8 @@ namespace ISproj.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Id", courseAttendant.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "id", courseAttendant.StudentId);
+            ViewData["CourseId"] = new SelectList(_context.CourseModel, "Id", "Name", courseAttendant.CourseId);
+            ViewData["StudentId"] = new SelectList(_context.StudentViewModel, "id", "FullName", courseAttendant.StudentId);
             return View(courseAttendant);
         }
 

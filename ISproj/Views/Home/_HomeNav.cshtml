@@ -16,6 +16,7 @@
         <li class="@HomeNavPages.StudentNavClass(ViewContext)"><a asp-controller="Student" asp-action="Index">Studenti</a></li>
         <li class="@HomeNavPages.CoursesNavClass(ViewContext)"><a asp-controller="Courses" asp-action="Index">Cursuri</a></li>
         <li class="@HomeNavPages.ScholarshipNavClass(ViewContext)"><a asp-controller="Scholarship" asp-action="Index">Burse</a></li>
+        <li class="@HomeNavPages.AttendantNavClass(ViewContext)"><a asp-controller="CourseAttendant" asp-action="Index">Participanti cursuri</a></li>
     }
     else if (isSecretary)
     {

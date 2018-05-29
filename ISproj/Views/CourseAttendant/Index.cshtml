@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "/Views/Home/_Layout.cshtml";
+    ViewData.AddActivePage(HomeNavPages.Attendant);
 }
 
 <h2>Index</h2>
@@ -41,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.Attendances)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Course.Id)
+                @Html.DisplayFor(modelItem => item.Course.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student.id)
+                @Html.DisplayFor(modelItem => item.Student.FullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

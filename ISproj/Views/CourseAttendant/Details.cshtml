@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "/Views/Home/_Layout.cshtml";
+    ViewData.AddActivePage(HomeNavPages.Attendant);
 }
 
 <h2>Details</h2>
@@ -33,13 +35,13 @@
             @Html.DisplayNameFor(model => model.Course)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Course.Id)
+            @Html.DisplayFor(model => model.Course.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Student)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Student.id)
+            @Html.DisplayFor(model => model.Student.FullName)
         </dd>
     </dl>
 </div>
