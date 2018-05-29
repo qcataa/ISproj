@@ -12,17 +12,28 @@ namespace ISproj.Controllers
 {
     public class FacultyController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDbContext _context;
 
-        public FacultyController(ApplicationDbContext context)
+        public FacultyController(IDbContext context)
         {
             _context = context;
+        }
+
+        public ICollection<Faculty> DoIndex()
+        {
+            return _context.Faculty.ToList();
         }
 
         // GET: Faculty
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Faculty.ToListAsync());
+            return View(DoIndex());
+        }
+
+        public Faculty DoDetails(int? id)
+        {
+            return _context.Faculty
+                .SingleOrDefault(m => m.Id == id);
         }
 
         // GET: Faculty/Details/5
@@ -33,8 +44,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var faculty = await _context.Faculty
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var faculty = DoDetails(id);
             if (faculty == null)
             {
                 return NotFound();
