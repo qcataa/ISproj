@@ -208,14 +208,21 @@ namespace ISproj.Controllers
             return View(teacherViewModel);
         }
 
+        public Teacher DoDelete(string id)
+        {
+            var teacher = _context.TeacherViewModel.SingleOrDefault(m => m.Id == id);
+            _context.TeacherViewModel.Remove(teacher);
+            _context.SaveChanges();
+
+            return teacher;
+        }
+
         // POST: TeacherViewModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var teacher = await _context.TeacherViewModel.SingleOrDefaultAsync(m => m.Id == id);
-            _context.TeacherViewModel.Remove(teacher);
-            await _context.SaveChangesAsync();
+            var teacher = DoDelete(id);
             
             var user = await _userManager.FindByEmailAsync(teacher.Email);
             await _userManager.DeleteAsync(user);

@@ -16,6 +16,8 @@ namespace ISproj.Data
         EntityEntry Update(object entity);
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+        
+        int SaveChanges();
 
         EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class;
 
