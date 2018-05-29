@@ -14,12 +14,12 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Grade)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Attendances)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attendances)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course)
             </th>
@@ -33,9 +33,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @if(item.Grade != null) {
-                    Html.DisplayFor(modelItem => item.Grade);
-                } else {
+                @if (item.Grade != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Grade)
+                }
+                else
+                {
                     <span>-</span>
                 }
             </td>
