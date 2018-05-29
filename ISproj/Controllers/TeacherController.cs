@@ -17,11 +17,11 @@ namespace ISproj.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ApplicationDbContext _context;
+        private readonly IDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public TeacherController(
-            ApplicationDbContext context,
+            IDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager)
@@ -31,6 +31,12 @@ namespace ISproj.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+
+        public ICollection<Teacher> DoIndex()
+        {
+            return _context.TeacherViewModel.ToList();
+        }
+
         // GET: TeacherViewModels
         public async Task<IActionResult> Index()
         {
