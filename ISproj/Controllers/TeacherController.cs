@@ -40,7 +40,7 @@ namespace ISproj.Controllers
         // GET: TeacherViewModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TeacherViewModel.ToListAsync());
+            return View(DoIndex());
         }
 
         // GET: TeacherViewModels
