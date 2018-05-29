@@ -24,7 +24,7 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-        {
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -37,6 +37,25 @@
             </td>
 
         </tr>
-        }
+}
+        <button type="button" class="btn" id="downloadGradeButton">Descarca situatia scolara</button>
     </tbody>
 </table>
+
+<script type="text/javascript">
+
+    document.getElementById("downloadGradeButton").onclick = function () { generatePDF() };
+
+    function generatePDF() {
+        $.ajax({
+            url: '@Url.Action("GetStudentGrades", "Student")',
+            type: "GET",
+            dataType: "json",
+            success: {},
+            //error: function () {
+            //    alert("Raportul a fost descarcat cu success");
+            //}
+        });
+    }
+
+</script>

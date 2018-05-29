@@ -10,6 +10,7 @@ using ISproj.Models;
 using Microsoft.AspNetCore.Identity;
 using ISproj.Models.AccountViewModels;
 using ISproj.Models.CreateViewModels;
+using ISproj.Services;
 
 namespace ISproj.Controllers
 {
@@ -19,17 +20,20 @@ namespace ISproj.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IPDFWritter _pdfManager;
 
         public StudentController(
             ApplicationDbContext context, 
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IPDFWritter pdfManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _pdfManager = pdfManager;
         }
 
         // GET: StudentViewModels
@@ -238,20 +242,22 @@ namespace ISproj.Controllers
             return _context.StudentViewModel.Any(e => e.id == id);
         }
 
-        [HttpGet,ActionName("GetStudentGrades")]
-        public JsonResult GetAllGradesForEntity(int? id)
+        [HttpGet, ActionName("GetStudentGrades")]
+        public async Task<IActionResult> GenerateGradesPdf()
         {
-            if (id != null)
-            {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(HttpContext.User));
 
+            var email = user.Email;
 
-                var GradesList = _context.CourseAttendant
-                    .Include(c => c.Course)
-                    .Include(c => c.Student)
-                    .SingleOrDefaultAsync(m => m.Student.id == id);
+            var grades = await _context.CourseAttendant
+                .Include(attendant => attendant.Student)
+                .Where(attendant => attendant.Student.Email == email)
+                .Include(attendant => attendant.Course)
+                .Select(attendant => attendant.Course)
+                .ToListAsync();
 
-            }
-            return Json("");
+            _pdfManager.CreateGradesPDF(grades);
+            return View("Index");
         }
 
         public async Task<IActionResult> Grades()
