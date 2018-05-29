@@ -39,7 +39,7 @@ namespace ISproj
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddTransient<IPDFWritter, PDFWritter>();
             services.AddMvc();
         }
 
