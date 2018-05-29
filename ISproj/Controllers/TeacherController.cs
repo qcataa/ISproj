@@ -78,6 +78,11 @@ namespace ISproj.Controllers
             return View(courses);
         }
 
+        public Teacher DoDetails(string id)
+        {
+            return _context.TeacherViewModel.SingleOrDefault(m => m.Id == id);
+        }
+
         // GET: TeacherViewModels/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -86,8 +91,7 @@ namespace ISproj.Controllers
                 return NotFound();
             }
 
-            var teacherViewModel = await _context.TeacherViewModel
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var teacherViewModel = DoDetails(id);
             if (teacherViewModel == null)
             {
                 return NotFound();

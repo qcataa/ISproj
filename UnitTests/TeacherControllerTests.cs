@@ -15,7 +15,7 @@ namespace ISproj.UnitTests
     public class TeacherControllerTests
     {
         [TestMethod]
-        public void TestMethod1Async()
+        public void TestIndexAndFullName()
         {
             var teacherTestData = new List<Teacher>() {
                 new Teacher { Id = "1", FirstName = "Ion", LastName = "Gheorghe", Email="a@google.com", Courses = new List<CourseModel>() },
@@ -36,6 +36,33 @@ namespace ISproj.UnitTests
             //Assert
             Assert.IsTrue(results.Count == 4);
             Assert.IsTrue(results.ToArray()[0].FullName == "Gheorghe Ion");
+        }
+
+        [TestMethod]
+        public void TestDetails()
+        {
+            var teacherTestData = new List<Teacher>() {
+                new Teacher { Id = "1", FirstName = "Ion", LastName = "Gheorghe", Email="a@google.com", Courses = new List<CourseModel>() },
+                new Teacher { Id = "2", FirstName = "Ion1", LastName = "Gheorghe1", Email="a@google.com", Courses = new List<CourseModel>() },
+                new Teacher { Id = "3", FirstName = "Ion2", LastName = "Gheorghe2", Email="a@google.com", Courses = new List<CourseModel>() },
+                new Teacher { Id = "4", FirstName = "Ion3", LastName = "Gheorghe3", Email="a@google.com", Courses = new List<CourseModel>() },
+            };
+            var teachers = MockDbSet(teacherTestData);
+            //Set up mocks for db sets
+            var dbContext = new Mock<IDbContext>();
+            dbContext.Setup(m => m.TeacherViewModel).Returns(teachers.Object);
+
+            var teacherController = new TeacherController(dbContext.Object, null, null, null);
+
+            //Act
+            var teacher = teacherController.DoDetails("1");
+
+            //Assert
+            Assert.IsTrue(teacher != null);
+            Assert.IsTrue(teacher.Id.CompareTo("1") == 0);
+            Assert.IsTrue(teacher.FirstName.CompareTo("Ion") == 0);
+            Assert.IsTrue(teacher.LastName.CompareTo("Gheorghe") == 0);
+            Assert.IsTrue(teacher.Email.CompareTo("a@google.com") == 0);
         }
 
         Mock<DbSet<T>> MockDbSet<T>(IEnumerable<T> list) where T : class, new()
